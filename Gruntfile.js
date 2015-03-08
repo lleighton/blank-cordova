@@ -2,6 +2,13 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        exec:{
+            run:{
+                command:"cordova run ios --device",
+                stdout:true,
+                stderror:true
+            }
+        },
         clean: {
             build: {
                 src: ['www']
@@ -49,8 +56,8 @@ module.exports = function(grunt) {
                 tasks: ['copy']
             },
             css: {
-                files: ['**/*.scss'],
-                tasks: ['sass']
+                files: ['**/*.less'],
+                tasks: ['less']
             },
             js: {
                 files: ['src/js/*.js'],
@@ -87,10 +94,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     // Load the plugin that provides the "less" task.
     grunt.loadNpmTasks('grunt-contrib-less');
+    // Load the plugin that provides the "exec" task.
+    grunt.loadNpmTasks('grunt-exec');
 
 
     grunt.registerTask('build', ['clean', 'copy', 'less', 'uglify']);
     grunt.registerTask('default', ['build', 'connect:server', 'watch']);
+    grunt.registerTask('run', ['build','exec:run']);
 
 
 };
