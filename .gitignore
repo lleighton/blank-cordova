@@ -1,0 +1,9 @@
+/dest
+/node_modules
+/bower_components
+.DS_Store
+/.sass-cache
+/hooks
+/platforms/ios
+/platforms/android
+/www
