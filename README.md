@@ -1,3 +1,9 @@
+#blank-cordova
+
+### A small grunt build that will enable a small html/less/angular app to be deployed to multiple devices.
+
+-----------------------------------------
+
 ## INSTALLING
 
 git clone https://github.com/davidyarham/blank-cordova.git
