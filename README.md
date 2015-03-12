@@ -16,3 +16,5 @@ grunt android-emulator > run in android emulator
 grunt android-device > run on android device
 
 ngcordova is included for usage for any plugins.
+
+*** note: if the ios on device hangs at the loading screen for more than 20 seconds, open another terminal and run pkill lldb.
