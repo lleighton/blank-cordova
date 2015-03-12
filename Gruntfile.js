@@ -1,12 +1,26 @@
 module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        exec:{
-            run:{
-                command:"cordova run ios --device",
-                stdout:true,
-                stderror:true
+        exec: {
+            'ios-device': {
+                command: "cordova run ios --device",
+                stdout: false,
+                stderror: false
+            },
+            'ios-emulator': {
+                command: "cordova run ios --emulator",
+                stdout: true,
+                stderror: true
+            },
+            'android-device': {
+                command: "cordova run android --device",
+                stdout: false,
+                stderror: false
+            },
+            'android-emulator': {
+                command: "cordova run android --emulator",
+                stdout: true,
+                stderror: true
             }
         },
         clean: {
@@ -21,22 +35,29 @@ module.exports = function(grunt) {
                     cwd: 'src/',
                     src: ['*.html'],
                     dest: 'www/'
-                }, {
+                },{
                     expand: true,
-                    cwd: 'bower_components',
+                    cwd: 'bower_components/onsenui/build/css',
                     src: ['**/*'],
-                    dest: 'www/bower_components'
-                }]
+                    dest: 'www/css/onsenui/'
+                }],
             }
         },
         uglify: {
             options: {
                 report: 'min',
-                mangle: false
+                mangle: false,
+                beautify:true
             },
-            build: {
-                src: 'src/js/**/*.js',
-                dest: 'www/js/<%= pkg.name %>.min.js'
+            libs: {
+                files: {
+                    'www/js/libs.js': ['bower_components/jquery/jquery.js','bower_components/onsenui/build/js/onsenui_all.js','bower_components/ngCordova/ng-cordova.js']
+                }
+            },
+            app: {
+                files: {
+                    'www/js/app.js': ['src/js/app.js', 'src/js/controllers/**/*.js']
+                }
             }
         },
         connect: {
@@ -100,7 +121,10 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', ['clean', 'copy', 'less', 'uglify']);
     grunt.registerTask('default', ['build', 'connect:server', 'watch']);
-    grunt.registerTask('run', ['build','exec:run']);
+    grunt.registerTask('ios-device', ['build', 'exec:ios-device']);
+    grunt.registerTask('ios-emulator', ['build', 'exec:ios-emulator']);
+    grunt.registerTask('android-device', ['build', 'exec:android-device']);
+    grunt.registerTask('android-emulator', ['build', 'exec:android-emulator']);
 
 
 };
