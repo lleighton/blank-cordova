@@ -8,11 +8,15 @@
 
 git clone https://github.com/davidyarham/blank-cordova.git
 
-sudo npm install cordova -g [If not already done]
+npm install grunt-cli
 
-sudo npm install bower -g [If not already done]
+npm install cordova -g [If not already done]
 
-sudo npm install
+npm install bower -g [If not already done]
+
+npm install -g ios-sim
+
+npm install
 
 bower install
 
